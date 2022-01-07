@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <RunConfiguration>
+        <MaxCpuCount>6</MaxCpuCount>
+        <ResultsDirectory>TestResults</ResultsDirectory>
+        <TargetPlatform>x64</TargetPlatform>
+        <TestSessionTimeout>5000</TestSessionTimeout>
+        <TreatNoTestsAsError>false</TreatNoTestsAsError>
+    </RunConfiguration>
+    
+    <LoggerRunSettings>
+        <Loggers>
+            <Logger friendlyName="console" enabled="True">
+                <Configuration>
+                    <Verbosity>Diagnostic</Verbosity>
+                </Configuration>
+            </Logger>
+            <Logger friendlyName="trx" enabled="True">
+                <Configuration>
+                    <LogFileName>results.trx</LogFileName>
+                </Configuration>
+            </Logger>
+            <Logger friendlyName="html" enabled="True">
+                <Configuration>
+                    <LogFileName>results.html</LogFileName>
+                </Configuration>
+            </Logger>
+            <Logger friendlyName="blame" enabled="True"/>
+        </Loggers>
+    </LoggerRunSettings>
+</RunSettings>
