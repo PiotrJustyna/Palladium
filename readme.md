@@ -13,6 +13,6 @@ To run, use any of the methods listed below:
 To verify everything is working correctly:
 
 * Dashboard: http://localhost:8081
-* API: http://localhost:5000/dummy
+* API: http://localhost:5000/smoketests
 
 Provided the ports are not changed.

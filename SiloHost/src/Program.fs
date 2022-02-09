@@ -95,8 +95,5 @@ let main args =
         .RunConsoleAsync()
     |> Async.AwaitTask
     |> Async.RunSynchronously
-
-    // 2022-02-09 PJ:
-    // Define short lifetime for test grains.
     
     0
