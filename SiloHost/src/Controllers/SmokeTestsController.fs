@@ -29,9 +29,16 @@ type SmokeTestsController(logger: ILogger<SmokeTestsController>, clusterClient: 
             let stopwatch = Stopwatch()
             stopwatch.Start()
             
-            let qwe : TestRun =
-                { Id = ""
-                  Name = "" }
+            let qwe : TestRun = {
+                    Id = ""
+                    Name = ""
+                    Times = failwith "todo"
+                    TestSettings = failwith "todo"
+                    TestResults = failwith "todo"
+                    TestDefinitions = failwith "todo"
+                    TestEntries = failwith "todo"
+                    TestLists = failwith "todo"
+                    ResultSummary = failwith "todo" }
 
             let! results =
                 [| operation1
