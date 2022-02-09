@@ -13,12 +13,14 @@ open Orleans
 type SmokeTestsController(logger: ILogger<SmokeTestsController>, clusterClient: IClusterClient) =
     inherit ControllerBase()
 
-    let operation () : Task<bool> =
-        let grain =
-            clusterClient.GetGrain<ISmokeTests>(Guid.NewGuid())
-
+    let operation (test: GrainCancellationToken -> Task<bool>) : Task<bool> =
         let cancellationTokenSource = new GrainCancellationTokenSource()
-        grain.SmokeTest1 cancellationTokenSource.Token
+        test cancellationTokenSource.Token
+    
+    let operation1 : Task<bool> = clusterClient.GetGrain<ISmokeTests>(Guid.NewGuid()).SmokeTest1 |> operation
+
+    let operation2 : Task<bool> = clusterClient.GetGrain<ISmokeTests>(Guid.NewGuid()).SmokeTest2 |> operation
+
 
     [<HttpGet>]
     member _.Get() : Task<string> =
@@ -27,11 +29,11 @@ type SmokeTestsController(logger: ILogger<SmokeTestsController>, clusterClient: 
             stopwatch.Start()
 
             let! results =
-                [| operation ()
-                   operation ()
-                   operation () |]
+                [| operation1
+                   operation2
+                   operation1 |]
                 |> Task.WhenAll
 
             stopwatch.Stop()
-            return $"{results.[0]}, {results.[1]}, elapsed time: {stopwatch.ElapsedMilliseconds}ms"
+            return $"{results.[0]}, {results.[1]}, {results.[2]}, elapsed time: {stopwatch.ElapsedMilliseconds}ms"
         }
