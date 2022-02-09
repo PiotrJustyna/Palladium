@@ -4,6 +4,7 @@ open System
 open System.Diagnostics
 open System.Threading.Tasks
 open Grains
+open Grains.TestRun
 open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Logging
 open Orleans
@@ -27,6 +28,10 @@ type SmokeTestsController(logger: ILogger<SmokeTestsController>, clusterClient: 
         task {
             let stopwatch = Stopwatch()
             stopwatch.Start()
+            
+            let qwe : TestRun =
+                { Id = ""
+                  Name = "" }
 
             let! results =
                 [| operation1
