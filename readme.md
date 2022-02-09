@@ -1,9 +1,18 @@
-# palladium
+# readme
 
-Scaffolding for parallel F# test execution. To run, execute `run.sh`.
+Smoke tests in Orleans.
 
-## further reading
+## run
 
-* [dotnet test](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test)
-* [configure unit tests by using a .runsettings file](https://docs.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2022)
-* [configure a test run](https://github.com/Microsoft/vstest-docs/blob/main/docs/configure.md)
+To run, use any of the methods listed below:
+
+* `./run-silo-local.sh`
+* `./run-silo-docker.sh`
+* run it from your IDE, but please make sure you have the environment variables set to e.g. `DASHBOARDPORT=8081;GATEWAYPORT=3001;PRIMARYPORT=2001;SILOPORT=2001`
+
+To verify everything is working correctly:
+
+* Dashboard: http://localhost:8081
+* API: http://localhost:5000/dummy
+
+Provided the ports are not changed.

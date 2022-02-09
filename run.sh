@@ -1,1 +1,0 @@
-dotnet test ./Palladium.fsproj --configuration Release --settings ./test.runsettings
