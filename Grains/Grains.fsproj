@@ -7,7 +7,7 @@
 
     <ItemGroup>
         <Compile Include="src\SmokeTests.fs" />
-        <Compile Include="src\TestRun.fs" />
+        <Compile Include="src\TRX\TestRun.fs" />
     </ItemGroup>
 
     <ItemGroup>
