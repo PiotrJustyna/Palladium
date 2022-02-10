@@ -25,6 +25,8 @@ module Ports =
     let primarySiloPort () : Async<int> = async { return! port "PRIMARYPORT" }
 
     let dashboardPort () : Async<int> = async { return! port "DASHBOARDPORT" }
+    
+    let smokeTestsApiPort () : Async<int> = async { return! port "SMOKETESTSAPIPORT" }
 
 module IpAddresses =
     let localIpAddress () : Async<IPAddress> =

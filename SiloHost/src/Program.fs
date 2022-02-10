@@ -21,7 +21,8 @@ let main args =
                 [ Ports.siloPort ()
                   Ports.gatewayPort ()
                   Ports.primarySiloPort ()
-                  Ports.dashboardPort () ]
+                  Ports.dashboardPort ()
+                  Ports.smokeTestsApiPort()]
 
             let! results = tasks |> Async.Parallel
 
@@ -29,20 +30,22 @@ let main args =
             let gatewayPort = results.[1]
             let primarySiloPort = results.[2]
             let dashboardPort = results.[3]
+            let smokeTestsApiPort = results.[4]
 
-            return siloPort, gatewayPort, primarySiloPort, dashboardPort
+            return siloPort, gatewayPort, primarySiloPort, dashboardPort, smokeTestsApiPort
         }
 
     let ipAddress =
         IpAddresses.advertisedIpAddress ()
         |> Async.RunSynchronously
 
-    let siloPort, gatewayPort, primarySiloPort, dashboardPort = portsAsync |> Async.RunSynchronously
+    let siloPort, gatewayPort, primarySiloPort, dashboardPort, smokeTestsApiPort = portsAsync |> Async.RunSynchronously
     printfn $"IP Address: {ipAddress.ToString()}"
     printfn $"Silo Port: {siloPort}"
     printfn $"Gateway Port: {gatewayPort}"
     printfn $"Primary Silo Port: {primarySiloPort}"
     printfn $"Dashboard Port: {dashboardPort}"
+    printfn $"Smoke Tests API Port: {smokeTestsApiPort}"
 
     let configureLogging (builder: ILoggingBuilder) =
         let filter (l: LogLevel) = l.Equals LogLevel.Information
@@ -89,7 +92,7 @@ let main args =
                         .UseEndpoints(fun endpoints -> endpoints.MapControllers() |> ignore)
                     |> ignore)
                 .ConfigureServices(fun services -> services.AddControllers() |> ignore)
-                .UseUrls("http://*:5000")
+                .UseUrls($"http://*:{smokeTestsApiPort}")
             |> ignore)
         .UseOrleans(siloConfiguration)
         .RunConsoleAsync()

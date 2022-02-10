@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine as build
 
 COPY ./SiloHost/SiloHost.fsproj /src/SiloHost/SiloHost.fsproj
-COPY ./SiloHost/src/* /src/SiloHost/src/
+COPY ./SiloHost/src/ /src/SiloHost/src/
 
 COPY ./Grains/Grains.fsproj /src/Grains/Grains.fsproj
-COPY ./Grains/src/* /src/Grains/src/
+COPY ./Grains/src/ /src/Grains/src/
 
 COPY ./ops/entrypoint.sh /SiloHost/
 

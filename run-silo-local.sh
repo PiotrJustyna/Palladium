@@ -9,5 +9,6 @@ export GATEWAYPORT=3001
 export SILOPORT=2001
 export PRIMARYPORT=2001
 export DASHBOARDPORT=8081
+export SMOKETESTSAPIPORT=5000
 
 dotnet run --project ./SiloHost/SiloHost.fsproj
