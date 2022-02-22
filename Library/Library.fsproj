@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="src\Models\TestRun.fs" />
+        <Compile Include="src\Helpers.fs" />
+        <Compile Include="src\OrleansConfiguration.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FSharp.Quotations.Evaluator" Version="2.1.0" />
+    </ItemGroup>
+
+</Project>
