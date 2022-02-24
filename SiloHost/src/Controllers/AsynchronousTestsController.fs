@@ -99,15 +99,18 @@ type AsynchronousTestsController(clusterClient: IClusterClient) =
                                 RelativeResultsDirectory = x.ExecutionId })
                           .ToArray()
                   TestDefinitions =
-                      [| { Id = testId
-                           Name = testName
-                           Storage = testDll
-                           Execution = { Id = testExecutionId }
-                           TestMethod =
-                               { CodeBase = testDll
-                                 ClassName = testClassName
-                                 Name = testMethodName
-                                 AdapterTypeName = "orleans" } } |]
+                      results
+                          .Select(fun x ->
+                              { Id = x.TestId
+                                Name = x.TestName
+                                Storage = testDll
+                                Execution = { Id = x.ExecutionId }
+                                TestMethod =
+                                    { CodeBase = testDll
+                                      ClassName = testClassName
+                                      Name = x.TestName
+                                      AdapterTypeName = "orleans" } })
+                          .ToArray()
                   TestEntries =
                       results
                           .Select(fun x ->
