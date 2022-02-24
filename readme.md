@@ -66,6 +66,7 @@ To run, use any of the methods listed below:
 To verify everything is working correctly:
 
 * Dashboard: http://localhost:8081
+  * [Login Credentials](https://github.com/PiotrJustyna/Palladium/blob/main/SiloHost/src/Program.fs#L76)
 * API: http://localhost:5001/asynchronoustests
 
 Provided the ports are not changed.
