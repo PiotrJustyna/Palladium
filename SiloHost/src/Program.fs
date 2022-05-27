@@ -2,6 +2,7 @@ open System
 open System.Net
 open System.Reflection
 open Grains
+open Library.TestInterfaces
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.DependencyInjection
@@ -79,7 +80,7 @@ let main args =
                 .UseLinuxEnvironmentStatistics()
                 .ConfigureApplicationParts(fun applicationPartManager ->
                     applicationPartManager
-                        .AddApplicationPart(Assembly.GetAssembly(typeof<IAsynchronousTests>))
+                        .AddApplicationPart(Assembly.GetAssembly(typeof<AsynchronousTests>))
                         .WithReferences()
                         .WithCodeGeneration()
                     |> ignore)
