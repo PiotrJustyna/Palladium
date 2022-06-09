@@ -34,16 +34,18 @@ There are several components that are custom to this solution:
 
 * The Grains interfaces, which will be used to implement the test methods, need to be marked with a custom attribute.
 This attribute can be implemented in the same project where the interfaces are implemented.
-  ![](attribute.png)
 
+* ![](attribute.png)
 
 * The entry point for both Xunit and the Xunit.Orleans.TestFramework.
+
 These are 2 assembly attributes that must be specified in the assembly where the tests (grains) are implemented.
   * Xunit.TestFrameworkAttribute is needed to tell Xunit we have a custom TestFramework implementation
   * Xunit.Orleans.TestFramework.OrleansTestFrameworkAttribute is needed to tell our custom TestFramework which interfaces we can use
   to resolve the grains and run the tests, and we can optionally specify whether we want to stop the Orleans host after the test execution
   is completed.
-![](assembly_attr.png)
+
+  ![](assembly_attr.png)
 
 ## run
 
