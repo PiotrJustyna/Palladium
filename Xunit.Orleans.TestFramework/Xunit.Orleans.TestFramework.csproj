@@ -4,6 +4,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <TargetFramework>net6.0</TargetFramework>
+        <AssemblyName>Xunit.Orleans.TestFramework</AssemblyName>
+        <RootNamespace>Xunit.Orleans.TestFramework</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

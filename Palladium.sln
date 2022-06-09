@@ -9,7 +9,7 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Grains", "Grains\Grains.fsp
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Library", "Library\Library.fsproj", "{2EF943E1-998E-4C2A-83E5-F38A2EC44926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LN.TestFramework", "LN.TestFramework\LN.TestFramework.csproj", "{4461188B-B40E-4577-A340-5FB25CA8A92F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xunit.Orleans.TestFramework", "Xunit.Orleans.TestFramework\Xunit.Orleans.TestFramework.csproj", "{4461188B-B40E-4577-A340-5FB25CA8A92F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

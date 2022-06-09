@@ -7,6 +7,9 @@
 
     <ItemGroup>
         <Compile Include="src\AsynchronousTests.fs" />
+        <Content Include="xunit.runner.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
@@ -23,7 +26,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Library\Library.fsproj" />
-      <ProjectReference Include="..\LN.TestFramework\LN.TestFramework.csproj" />
+      <ProjectReference Include="..\Xunit.Orleans.TestFramework\Xunit.Orleans.TestFramework.csproj" />
     </ItemGroup>
 
 </Project>

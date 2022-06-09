@@ -2,7 +2,6 @@ open System
 open System.Net
 open System.Reflection
 open Grains
-open Library.TestInterfaces
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.DependencyInjection
@@ -33,15 +32,25 @@ let main args =
             let primarySiloPort = results.[2]
             let dashboardPort = results.[3]
             let smokeTestsApiPort = results.[4]
+            
+            let stringTasks = [Ports.clusterName ()
+                               Ports.serviceName ()]
+            
+            let! stringResults = stringTasks |> Async.Parallel
+            
+            let clusterName = stringResults.[0]
+            let serviceName = stringResults.[1]
 
-            return siloPort, gatewayPort, primarySiloPort, dashboardPort, smokeTestsApiPort
+            return siloPort, gatewayPort, primarySiloPort, dashboardPort, smokeTestsApiPort, clusterName, serviceName
         }
 
     let ipAddress =
         IpAddresses.advertisedIpAddress ()
         |> Async.RunSynchronously
 
-    let siloPort, gatewayPort, primarySiloPort, dashboardPort, testsApiPort = portsAsync |> Async.RunSynchronously
+    let siloPort, gatewayPort, primarySiloPort, dashboardPort, testsApiPort, clusterName, serviceName = portsAsync |> Async.RunSynchronously
+    printfn $"Cluster Name: {clusterName}"
+    printfn $"Service Name: {serviceName}"
     printfn $"IP Address: {ipAddress.ToString()}"
     printfn $"Silo Port: {siloPort}"
     printfn $"Gateway Port: {gatewayPort}"
@@ -56,6 +65,11 @@ let main args =
         |> ignore
 
     let builder = HostBuilder()
+    let configureServices = 
+        builder.ConfigureServices(fun (services : IServiceCollection) ->
+                services.AddSingleton<TestClassFixture>()
+                |> ignore
+            )
 
     let siloConfiguration =
         fun (siloBuilder: ISiloBuilder) ->
@@ -65,8 +79,8 @@ let main args =
                 .Configure<GrainCollectionOptions>(fun (options: GrainCollectionOptions) ->
                     options.CollectionAge <- TimeSpan.FromSeconds(61.0))
                 .Configure<ClusterOptions>(fun (options: ClusterOptions) ->
-                    options.ClusterId <- "dummy-test-cluster"
-                    options.ServiceId <- "dummy-test-service")
+                    options.ClusterId <- clusterName
+                    options.ServiceId <- serviceName)
                 .Configure<EndpointOptions>(fun (options: EndpointOptions) ->
                     options.SiloPort <- siloPort
                     options.AdvertisedIPAddress <- ipAddress

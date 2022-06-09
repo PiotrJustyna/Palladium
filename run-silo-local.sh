@@ -10,5 +10,7 @@ export SILOPORT=2001
 export PRIMARYPORT=2001
 export DASHBOARDPORT=8081
 export TESTSAPIPORT=5001
+export CLUSTERNAME='test-cluster'
+export SERVICENAME='test-service'
 
 dotnet run --project ./SiloHost/SiloHost.fsproj
