@@ -51,23 +51,30 @@ type AsynchronousTestsBeta() =
         [<Fact(Skip = "I don't want to do this.... :(")>]
         member this.Test4() : Task<bool> =
             task {
+                let a = 1
+                let b = 1
                 do! Task.Delay(600)
-                Assert.True(true)
-                return true
+                Assert.Equal(a, b)
+                return a = b
             }
 
         [<Fact>]
         member this.Test5() : Task<bool> =
             task {
+                let a = 1
                 do! Task.Delay(800)
-                return false
+                Assert.True(a > 1, $"The value {a} is not greater than 1.")
+                return a > 1
             }
 
         [<Fact>]
         member this.Test6() : Task<bool> =
             task {
+                let a = 1
+                let b = 2
                 do! Task.Delay(1000)
-                return false
+                Assert.False(a < b)
+                return a + b = 3
             }
 
 //class fixture to be injected in the test class

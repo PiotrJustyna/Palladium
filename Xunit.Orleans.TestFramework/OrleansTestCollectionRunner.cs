@@ -107,7 +107,19 @@ public class OrleansTestCollectionRunner : TestCollectionRunner<IXunitTestCase>
         
         //invoke the method on the grain instance
         var sw = Stopwatch.StartNew();
-        var testResult = await (Task<bool>) grainInterfaceInvocationMethod.Invoke(grain, testCase.TestMethodArguments)!;
+        var testResult = true;
+        XunitException? testException = null;
+
+        try
+        {
+            await (Task)grainInterfaceInvocationMethod.Invoke(grain, testCase.TestMethodArguments)!;
+        }
+        catch (XunitException e)
+        {
+            testException = e;
+            testResult = false;
+        }
+
         sw.Stop();
         
         var executionElapsedTime = (decimal)sw.ElapsedMilliseconds / 1000;
@@ -134,13 +146,15 @@ public class OrleansTestCollectionRunner : TestCollectionRunner<IXunitTestCase>
 
         //log diagnostic message
         _diagnosticMessageSink.OnMessage(
-            new DiagnosticMessage("The test {0} executed in {1} seconds. Test {2} with the following parameters: {3}",  
+            new DiagnosticMessage("The test {0} executed in {1} seconds. Test {2} with the following parameters: {3} {4}",  
                 testCase.Method.Name, 
                 executionElapsedTime, 
                 testResult ? "passed" : "failed",
                 testCase.TestMethodArguments == null || testCase.TestMethodArguments.Length == 0 
                     ? "nothing" 
-                    : string.Join(',', testCase.TestMethodArguments)));
+                    : string.Join(',', testCase.TestMethodArguments),
+                testResult ? string.Empty : $"{Environment.NewLine} Test failure exception: {testException?.UserMessage ?? testException?.StackTrace}"
+                ));
         
         //add method invocation result to the result collection
         collectionResult.Add((testResult, executionElapsedTime));
