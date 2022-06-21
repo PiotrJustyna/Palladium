@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFramework>net6.0</TargetFramework>
+        <AssemblyName>Xunit.Orleans.TestFramework</AssemblyName>
+        <RootNamespace>Xunit.Orleans.TestFramework</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Orleans.Client" Version="3.6.0" />
+      <PackageReference Include="xunit.assert" Version="2.4.1" />
+      <PackageReference Include="xunit.core" Version="2.4.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Library\Library.fsproj" />
+    </ItemGroup>
+
+</Project>

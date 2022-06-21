@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Grains\Grains.fsproj" />
+        <ProjectReference Include="..\Library\Library.fsproj" />
     </ItemGroup>
 
     <ItemGroup>

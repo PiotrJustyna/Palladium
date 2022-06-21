@@ -16,7 +16,7 @@ module Ports =
             | true -> parsedPort
             | false -> raise (ArgumentException($"${environmentVariableKey} environment variable not set"))
 
-        async { return port }
+        async { return port }       
 
     let gatewayPort () : Async<int> = async { return! port "GATEWAYPORT" }
 
@@ -26,8 +26,10 @@ module Ports =
 
     let dashboardPort () : Async<int> = async { return! port "DASHBOARDPORT" }
 
-    let testsApiPort () : Async<int> =
-        async { return! port "TESTSAPIPORT" }
+    let testsApiPort () : Async<int> = async { return! port "TESTSAPIPORT" }
+    
+    let clusterName () : Async<string> = async { return Environment.GetEnvironmentVariable("CLUSTERNAME") }
+    let serviceName () : Async<string> = async { return Environment.GetEnvironmentVariable("SERVICENAME") }
 
 module IpAddresses =
     let localIpAddress () : Async<IPAddress> =

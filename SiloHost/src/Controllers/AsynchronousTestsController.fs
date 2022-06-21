@@ -5,9 +5,9 @@ open System.IO
 open System.Linq
 open System.Threading.Tasks
 open System.Xml.Serialization
-open Grains
 open Library
 open Library.Models.Tests
+open Library.TestInterfaces
 open Microsoft.AspNetCore.Mvc
 open Orleans
 
